@@ -1,21 +1,48 @@
-import { Link } from 'react-router'
+// src/components/Navbar.jsx
+import React from 'react';
+import { Link } from 'react-router';
+import { FaUserCircle } from 'react-icons/fa';
 
-function Navbar() {
-    return (
-        <nav className='flex flex-row w-full justify-center items-center px-6 max-w-[1440px]'>
-            <div className='flex flex-row w-full justify-between items-center'>
-                <Link to='/'>
-                    Home
-                </Link>
-                <Link to='/items'>
-                    Items
-                </Link>
-                <Link to='/map'>
-                    Map
-                </Link>
-            </div>
-        </nav>
-    )
-}
+const Navbar = () => {
+  return (
+    <nav className="bg-gray-300 py-4 px-6">
+      <div className="container mx-auto flex items-center justify-between">
+        {/* Logo à gauche */}
+        <div className="text-xl font-bold text-gray-900">
+          <Link to="/" className="hover:text-gray-700 transition-colors">
+            Logo
+          </Link>
+        </div>
 
-export default Navbar
+        {/* Liens de navigation au centre */}
+
+        <Link
+        to="/items"
+        className="text-gray-900 hover:text-gray-700 hover:font-medium transition-colors"
+        >
+        ItemList
+        </Link>
+        <Link
+        to="/sortable-items"
+        className="text-gray-900 hover:text-gray-700 hover:font-medium transition-colors"
+        >
+        Objet trouvé
+        </Link>
+        <Link
+        to="/map"
+        className="text-gray-900 hover:text-gray-700 hover:font-medium transition-colors"
+        >
+        Carte interactive
+        </Link>
+
+
+        {/* Icône de profil à droite */}
+        <div className="text-gray-900">
+          <FaUserCircle className="h-6 w-6 hover:text-gray-700 transition-colors" />
+        </div>
+      </div>
+    </nav>
+  );
+};
+
+export default Navbar;
