@@ -1,6 +1,6 @@
 // src/components/ItemList.jsx
 import React, { useEffect, useState } from 'react';
-import { supabase } from '../utils/supabase'; // Assurez-vous que le chemin est correct
+import { supabase } from '../../utils/supabase'; // Assurez-vous que le chemin est correct
 
 const ItemList = () => {
   const [items, setItems] = useState([]);

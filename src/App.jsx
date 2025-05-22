@@ -1,13 +1,17 @@
 // src/App.jsx
 import React from 'react';
-import ItemCRUD from './components/ItemManage/ItemCRUD';
+import GlobalLayout from './layouts/GlobalLayout';
+import MainRouter from './navigation/MainRouter';
+import { BrowserRouter } from 'react-router';
 
 function App() {
   return (
-    <div className="App">
-      <ItemCRUD />
-    </div>
-  );
+    <BrowserRouter>
+      <GlobalLayout>
+        <MainRouter />
+      </GlobalLayout>
+    </BrowserRouter>
+    );
 }
 
 export default App;
