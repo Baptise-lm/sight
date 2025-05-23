@@ -173,7 +173,7 @@ const SortableItemList = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 py-12 px-4">
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-7xl mx-auto mb-16">
         <h1 className="text-[38px] font-bold mb-8 text-center text-gray-900">
           Liste triable des objets
         </h1>

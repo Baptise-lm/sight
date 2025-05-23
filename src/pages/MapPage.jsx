@@ -98,7 +98,7 @@ const MapPage = () => {
                 placeholder="Rechercher un lieu..."
                 value={searchTerm}
                 onChange={handleSearchChange}
-                className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+                className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-gray-500 focus:border-gray-500"
               />
             </div>
 
@@ -108,7 +108,7 @@ const MapPage = () => {
                 <select
                   value={selectedCity}
                   onChange={handleCityChange}
-                  className="block w-full pl-3 pr-10 py-2 border border-gray-300 rounded-md leading-5 bg-white focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+                  className="block w-full pl-3 pr-10 py-2 border border-gray-300 rounded-md leading-5 bg-white focus:outline-none focus:ring-1 focus:ring-gray-500 focus:border-gray-500"
                 >
                   <option value="">Toutes les villes</option>
                   {citiesData.map(city => (
@@ -126,7 +126,7 @@ const MapPage = () => {
                 <select
                   value={selectedCategory}
                   onChange={handleCategoryChange}
-                  className="block w-full pl-3 pr-10 py-2 border border-gray-300 rounded-md leading-5 bg-white focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+                  className="block w-full pl-3 pr-10 py-2 border border-gray-300 rounded-md leading-5 bg-white focus:outline-none focus:ring-1 focus:ring-gray-500 focus:border-gray-500"
                 >
                   <option value="">Toutes les catégories</option>
                   {categoriesData.map(category => (
@@ -161,7 +161,7 @@ const MapPage = () => {
           </button>
         </div>
         {/* Conteneur pour la carte */}
-        <div className="flex justify-center">
+        <div className="flex justify-center mb-16">
           <div className="w-full max-w-[1100px] h-[900px] bg-white rounded-lg shadow-lg overflow-hidden">
             <Map
               pins={filteredPins}

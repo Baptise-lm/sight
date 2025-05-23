@@ -3,7 +3,7 @@ import { FaHome, FaMapMarkedAlt, FaQuestionCircle, FaEnvelope, FaFileContract, F
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-100 py-8 px-4 mt-16">
+    <footer className="bg-gray-100 py-8 px-4">
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row justify-between items-center gap-8 max-w-[1100px] mx-auto">
           {/* Logo */}

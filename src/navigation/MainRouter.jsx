@@ -1,9 +1,10 @@
 import { Routes, Route, Navigate } from 'react-router'
-import HomePage from '../pages/HomePage'
+import HomePage from '../pages/HomePage'    
 import MapPage from '../pages/MapPage'
 import SortableItemListPage from '../pages/SortableItemListPage'
 import ContactPage from '../pages/ContactPage'
-import LostItemForm from '../pages/LostItemForm' 
+import LostItemForm from '../pages/LostItemForm'
+import ReservationPage from '../pages/ReservationPage'
 
 function MainRouter() {
     return (
@@ -17,6 +18,7 @@ function MainRouter() {
             <Route path='/sortable-items' element={<SortableItemListPage />} />
             <Route path='/contact' element={<ContactPage />} />
             <Route path='/lost-item-form' element={<LostItemForm />} />
+            <Route path='/reservation' element={<ReservationPage />} />
         </Routes>
     )
 }

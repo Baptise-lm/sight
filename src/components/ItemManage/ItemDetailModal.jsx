@@ -1,8 +1,14 @@
-// src/components/ItemDetailModal.jsx
 import React from 'react';
+import { useNavigate } from 'react-router';
 import { FaTimes, FaBox, FaCalendar, FaTag, FaBuilding, FaMapMarker } from 'react-icons/fa';
 
 const ItemDetailModal = ({ item, onClose }) => {
+  const navigate = useNavigate();
+
+  const handleReservationClick = () => {
+    navigate('/reservation', { state: { item } });
+  };
+
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
       <div className="bg-white rounded-lg shadow-xl w-full max-w-md p-6 relative">
@@ -49,6 +55,16 @@ const ItemDetailModal = ({ item, onClose }) => {
           <div className="w-full">
             <h3 className="text-lg font-medium mb-2">Description:</h3>
             <p className="text-gray-700">{item.description || 'Aucune description disponible'}</p>
+          </div>
+
+          {/* Bouton de réservation */}
+          <div className="mt-6 w-full">
+            <button
+              onClick={handleReservationClick}
+              className="w-full px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700 transition-colors"
+            >
+              Cet objet m'appartient
+            </button>
           </div>
         </div>
       </div>
