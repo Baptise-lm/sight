@@ -2,6 +2,7 @@
 import React from 'react';
 import GlobalLayout from './layouts/GlobalLayout';
 import MainRouter from './navigation/MainRouter';
+import Footer from './components/Footer';
 import { BrowserRouter } from 'react-router';
 
 function App() {
@@ -9,6 +10,7 @@ function App() {
     <BrowserRouter>
       <GlobalLayout>
         <MainRouter />
+        <Footer />
       </GlobalLayout>
     </BrowserRouter>
     );

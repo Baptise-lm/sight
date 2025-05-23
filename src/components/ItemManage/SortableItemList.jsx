@@ -1,27 +1,74 @@
 // src/components/SortableItemList.jsx
 import React, { useEffect, useState } from 'react';
 import { supabase } from '../../utils/supabase';
-import { FaSearch, FaBox, FaSort, FaSortUp, FaSortDown } from 'react-icons/fa';
+import ItemDetailModal from './ItemDetailModal';
+import { FaSearch, FaBox, FaFilter } from 'react-icons/fa';
 
 const SortableItemList = () => {
   const [items, setItems] = useState([]);
   const [sortBy, setSortBy] = useState('name');
   const [sortOrder, setSortOrder] = useState('asc');
   const [searchTerm, setSearchTerm] = useState('');
-  const [isSortDropdownOpen, setIsSortDropdownOpen] = useState(false);
-  const [isOrderDropdownOpen, setIsOrderDropdownOpen] = useState(false);
+  const [selectedItem, setSelectedItem] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [categories, setCategories] = useState([]);
+  const [villes, setVilles] = useState([]);
+  const [etablissements, setEtablissements] = useState([]);
+  const [selectedVille, setSelectedVille] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('');
+  const [selectedEtablissement, setSelectedEtablissement] = useState('');
 
   useEffect(() => {
     fetchItems();
-  }, [sortBy, sortOrder, searchTerm]);
+    fetchCategories();
+    fetchVilles();
+  }, [sortBy, sortOrder, searchTerm, selectedVille, selectedCategory, selectedEtablissement]);
+
+  useEffect(() => {
+    if (selectedVille) {
+      fetchEtablissementsByVille(selectedVille);
+    } else {
+      setEtablissements([]);
+      setSelectedEtablissement('');
+    }
+  }, [selectedVille]);
 
   const fetchItems = async () => {
-    let query = supabase.from('items').select('*');
+    let query = supabase
+      .from('items')
+      .select(`
+        *,
+        categories:category_id (
+          nom
+        ),
+        etablissements:etablissement_id (
+          *,
+          villes:ville_id (
+            *
+          )
+        )
+      `);
 
+    // Filtres
+    if (selectedCategory) {
+      query = query.eq('category_id', selectedCategory);
+    }
+
+    if (selectedEtablissement) {
+      query = query.eq('etablissement_id', selectedEtablissement);
+    }
+
+    if (selectedVille) {
+      query = query.eq('etablissements.villes.id', selectedVille);
+    }
+
+    // Tri
     if (sortBy === 'category') {
-      query = query.order('category', { ascending: sortOrder === 'asc' });
-    } else if (sortBy === 'found_location') {
-      query = query.order('found_location', { ascending: sortOrder === 'asc' });
+      query = query.order('category_id', { ascending: sortOrder === 'asc' });
+    } else if (sortBy === 'ville') {
+      query = query.order('etablissements.villes.nom', { ascending: sortOrder === 'asc' });
+    } else if (sortBy === 'etablissement') {
+      query = query.order('etablissement_id', { ascending: sortOrder === 'asc' });
     } else if (sortBy === 'found_date') {
       query = query.order('found_date', { ascending: sortOrder === 'asc' });
     } else {
@@ -41,158 +88,255 @@ const SortableItemList = () => {
     }
   };
 
+  const fetchCategories = async () => {
+    const { data, error } = await supabase
+      .from('categories')
+      .select('*')
+      .order('nom', { ascending: true });
+
+    if (error) {
+      console.error('Error fetching categories:', error);
+    } else {
+      setCategories(data);
+    }
+  };
+
+  const fetchVilles = async () => {
+    const { data, error } = await supabase
+      .from('villes')
+      .select('*')
+      .order('nom', { ascending: true });
+
+    if (error) {
+      console.error('Error fetching villes:', error);
+    } else {
+      setVilles(data);
+    }
+  };
+
+  const fetchEtablissementsByVille = async (villeId) => {
+    const { data, error } = await supabase
+      .from('etablissements')
+      .select('*')
+      .eq('ville_id', villeId)
+      .order('nom', { ascending: true });
+
+    if (error) {
+      console.error('Error fetching etablissements:', error);
+    } else {
+      setEtablissements(data);
+    }
+  };
+
+  const handleSortChange = (e) => {
+    setSortBy(e.target.value);
+  };
+
+  const handleOrderChange = (e) => {
+    setSortOrder(e.target.value);
+  };
+
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value);
   };
 
-  const toggleSortDropdown = () => {
-    setIsSortDropdownOpen(!isSortDropdownOpen);
-    setIsOrderDropdownOpen(false);
+  const handleVilleChange = (e) => {
+    const villeId = e.target.value;
+    setSelectedVille(villeId);
+    setSelectedEtablissement('');
   };
 
-  const toggleOrderDropdown = () => {
-    setIsOrderDropdownOpen(!isOrderDropdownOpen);
-    setIsSortDropdownOpen(false);
+  const handleCategoryChange = (e) => {
+    setSelectedCategory(e.target.value);
   };
 
-  const handleSortSelect = (value) => {
-    setSortBy(value);
-    setIsSortDropdownOpen(false);
+  const handleEtablissementChange = (e) => {
+    setSelectedEtablissement(e.target.value);
   };
 
-  const handleOrderSelect = (value) => {
-    setSortOrder(value);
-    setIsOrderDropdownOpen(false);
+  const handleItemClick = (item) => {
+    setSelectedItem(item);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedItem(null);
+  };
+
+  const resetFilters = () => {
+    setSelectedVille('');
+    setSelectedCategory('');
+    setSelectedEtablissement('');
+    setSearchTerm('');
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-3xl mx-auto">
-        {/* Titre principal */}
-        <h2 className="text-2xl font-bold text-center text-gray-900 mb-8">
-          Liste des objets stockés chez eux
-        </h2>
+    <div className="min-h-screen bg-gray-50 py-12 px-4">
+      <div className="max-w-7xl mx-auto">
+        <h1 className="text-[38px] font-bold mb-8 text-center text-gray-900">
+          Liste triable des objets
+        </h1>
 
         {/* Barre de recherche */}
-        <div className="relative mb-6">
-          <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-            <FaSearch className="h-5 w-5 text-gray-400" />
-          </div>
-          <input
-            type="text"
-            placeholder="Input..."
-            value={searchTerm}
-            onChange={handleSearchChange}
-            className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
-          />
-        </div>
-
-        {/* Zone de filtres */}
-        <div className="flex flex-wrap justify-center gap-4 mb-6">
-          {/* Filtre de tri */}
+        <div className="max-w-[1100px] mb-6 mx-auto">
           <div className="relative">
-            <button
-              onClick={toggleSortDropdown}
-              className="inline-flex justify-between w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-            >
-              <span>Trier par</span>
-              <FaSort className="ml-2 h-5 w-5" />
-            </button>
-
-            {isSortDropdownOpen && (
-              <div className="absolute z-10 mt-1 w-full rounded-md bg-white shadow-lg">
-                <div className="py-1">
-                  <button
-                    onClick={() => handleSortSelect('name')}
-                    className={`block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 ${sortBy === 'name' ? 'bg-gray-100' : ''}`}
-                  >
-                    Nom
-                  </button>
-                  <button
-                    onClick={() => handleSortSelect('category')}
-                    className={`block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 ${sortBy === 'category' ? 'bg-gray-100' : ''}`}
-                  >
-                    Catégorie
-                  </button>
-                  <button
-                    onClick={() => handleSortSelect('found_location')}
-                    className={`block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 ${sortBy === 'found_location' ? 'bg-gray-100' : ''}`}
-                  >
-                    Lieu de découverte
-                  </button>
-                  <button
-                    onClick={() => handleSortSelect('found_date')}
-                    className={`block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 ${sortBy === 'found_date' ? 'bg-gray-100' : ''}`}
-                  >
-                    Date de découverte
-                  </button>
-                </div>
-              </div>
-            )}
-          </div>
-
-          {/* Filtre d'ordre */}
-          <div className="relative">
-            <button
-              onClick={toggleOrderDropdown}
-              className="inline-flex justify-between w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-            >
-              <span>Ordre</span>
-              {sortOrder === 'asc' ? (
-                <FaSortUp className="ml-2 h-5 w-5" />
-              ) : (
-                <FaSortDown className="ml-2 h-5 w-5" />
-              )}
-            </button>
-
-            {isOrderDropdownOpen && (
-              <div className="absolute z-10 mt-1 w-full rounded-md bg-white shadow-lg">
-                <div className="py-1">
-                  <button
-                    onClick={() => handleOrderSelect('asc')}
-                    className={`block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 ${sortOrder === 'asc' ? 'bg-gray-100' : ''}`}
-                  >
-                    <div className="flex items-center">
-                      <span>Croissant</span>
-                      <FaSortUp className="ml-2 h-4 w-4" />
-                    </div>
-                  </button>
-                  <button
-                    onClick={() => handleOrderSelect('desc')}
-                    className={`block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 ${sortOrder === 'desc' ? 'bg-gray-100' : ''}`}
-                  >
-                    <div className="flex items-center">
-                      <span>Décroissant</span>
-                      <FaSortDown className="ml-2 h-4 w-4" />
-                    </div>
-                  </button>
-                </div>
-              </div>
-            )}
+            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+              <FaSearch className="h-5 w-5 text-gray-400" />
+            </div>
+            <input
+              type="text"
+              placeholder="Rechercher..."
+              value={searchTerm}
+              onChange={handleSearchChange}
+              className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-gray-500 focus:border-gray-500"
+            />
           </div>
         </div>
 
-        {/* Liste des objets */}
-        <div className="space-y-4">
+        {/* Filtres */}
+        <div className="bg-white rounded-lg shadow-md p-6 mb-8 max-w-[1100px] mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+            {/* Tri par */}
+            <div>
+              <label htmlFor="sortBy" className="block text-sm font-medium text-gray-700 mb-1">
+                Trier par
+              </label>
+              <select
+                id="sortBy"
+                value={sortBy}
+                onChange={handleSortChange}
+                className="block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-gray-500 focus:border-gray-500"
+              >
+                <option value="name">Nom</option>
+                <option value="category">Catégorie</option>
+                <option value="ville">Ville</option>
+                <option value="etablissement">Établissement</option>
+                <option value="found_date">Date</option>
+              </select>
+            </div>
+
+            {/* Ordre */}
+            <div>
+              <label htmlFor="sortOrder" className="block text-sm font-medium text-gray-700 mb-1">
+                Ordre
+              </label>
+              <select
+                id="sortOrder"
+                value={sortOrder}
+                onChange={handleOrderChange}
+                className="block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-gray-500 focus:border-gray-500"
+              >
+                <option value="asc">Croissant</option>
+                <option value="desc">Décroissant</option>
+              </select>
+            </div>
+
+            {/* Catégorie */}
+            <div>
+              <label htmlFor="category" className="block text-sm font-medium text-gray-700 mb-1">
+                Catégorie
+              </label>
+              <select
+                id="category"
+                value={selectedCategory}
+                onChange={handleCategoryChange}
+                className="block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-gray-500 focus:border-gray-500"
+              >
+                <option value="">Toutes les catégories</option>
+                {categories.map(category => (
+                  <option key={category.id} value={category.id}>{category.nom}</option>
+                ))}
+              </select>
+            </div>
+
+            {/* Ville */}
+            <div>
+              <label htmlFor="ville" className="block text-sm font-medium text-gray-700 mb-1">
+                Ville
+              </label>
+              <select
+                id="ville"
+                value={selectedVille}
+                onChange={handleVilleChange}
+                className="block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-gray-500 focus:border-gray-500"
+              >
+                <option value="">Toutes les villes</option>
+                {villes.map(ville => (
+                  <option key={ville.id} value={ville.id}>{ville.nom}</option>
+                ))}
+              </select>
+            </div>
+
+            {/* Établissement */}
+            {selectedVille && (
+              <div className="md:col-span-4">
+                <label htmlFor="etablissement" className="block text-sm font-medium text-gray-700 mb-1">
+                  Établissement
+                </label>
+                <select
+                  id="etablissement"
+                  value={selectedEtablissement}
+                  onChange={handleEtablissementChange}
+                  className="block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-gray-500 focus:border-gray-500"
+                >
+                  <option value="">Tous les établissements</option>
+                  {etablissements.map(etablissement => (
+                    <option key={etablissement.id} value={etablissement.id}>{etablissement.nom}</option>
+                  ))}
+                </select>
+              </div>
+            )}
+
+            {/* Bouton de réinitialisation */}
+            <div className="flex justify-end md:col-span-4">
+              <button
+                type="button"
+                onClick={resetFilters}
+                className="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition-colors"
+              >
+                Réinitialiser les filtres
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Liste des items */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-[1100px] mx-auto">
           {items.length > 0 ? (
             items.map(item => (
-              <div key={item.id} className="bg-white rounded-lg shadow-sm p-4 flex items-center">
-                <div className="mr-4">
-                  <FaBox className="h-6 w-6 text-gray-400" />
-                </div>
-                <div className="flex-1">
-                  <p className="text-gray-900 font-medium">
-                    {item.name} - {item.category} - {item.found_location}
-                  </p>
+              <div
+                key={item.id}
+                className="bg-white p-4 rounded-lg shadow-md cursor-pointer hover:shadow-lg transition-shadow"
+                onClick={() => handleItemClick(item)}
+              >
+                <div className="flex items-center">
+                  <div className="mr-4">
+                    <FaBox className="h-6 w-6 text-gray-400" />
+                  </div>
+                  <div className="flex-1">
+                    <p className="text-gray-900 font-medium">
+                      {item.name} - {item.categories?.nom || 'Catégorie inconnue'}
+                    </p>
+                    <p className="text-gray-500 text-sm">
+                      {item.etablissements?.villes?.nom || 'Ville inconnue'}
+                    </p>
+                  </div>
                 </div>
               </div>
             ))
           ) : (
-            <div className="text-center py-8 text-gray-500">
-              Aucun objet trouvé.
-            </div>
+            <p className="text-gray-600 col-span-full text-center">Aucun objet trouvé.</p>
           )}
         </div>
+
+        {/* Modal pour les détails de l'item */}
+        {isModalOpen && selectedItem && (
+          <ItemDetailModal
+            item={selectedItem}
+            onClose={closeModal}
+          />
+        )}
       </div>
     </div>
   );

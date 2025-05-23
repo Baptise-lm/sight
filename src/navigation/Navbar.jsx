@@ -17,10 +17,10 @@ const Navbar = () => {
         {/* Liens de navigation au centre */}
 
         <Link
-        to="/items"
+        to="/lost-item-form"
         className="text-gray-900 hover:text-gray-700 hover:font-medium transition-colors"
         >
-        ItemList
+        Objet perdu
         </Link>
         <Link
         to="/sortable-items"
@@ -33,6 +33,12 @@ const Navbar = () => {
         className="text-gray-900 hover:text-gray-700 hover:font-medium transition-colors"
         >
         Carte interactive
+        </Link>
+        <Link
+        to="/contact"
+        className="text-gray-900 hover:text-gray-700 hover:font-medium transition-colors"
+        >
+        Contact
         </Link>
 
 
