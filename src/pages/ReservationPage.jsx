@@ -268,8 +268,6 @@ const ReservationPage = () => {
               {errors.message && <p className="mt-1 text-sm text-red-600">{errors.message}</p>}
             </div>
 
-            <p className='font-normal text-[16px] font-nunito text-[#4A4A4A]'>* Champs Obligatoires</p>
-
             {/* Case à cocher */}
             <div className="flex items-start">
               <div className="flex items-center h-5">
@@ -279,28 +277,28 @@ const ReservationPage = () => {
                   type="checkbox"
                   checked={formData.acceptTerms}
                   onChange={handleChange}
-                  className="focus:ring-[#FFBC33] h-4 w-4 text-[#FFBC33] border-[#FFBC33] rounded"
+                  className="focus:ring-[#FFBC33] h-4 w-4 text-[#FFBC33] border-[#FFBC33] rounded cursor-pointer"
                 />
               </div>
               <div className="ml-3 text-sm">
-                <label htmlFor="acceptTerms" className="font-medium text-[#4A4A4A] font-nunito">
+                <label htmlFor="acceptTerms" className="font-medium text-[#4A4A4A] font-nunito cursor-pointer hover:text-[#E5A92E]">
                   J'accepte les conditions générales et la politique de confidentialité*
                 </label>
                 {errors.acceptTerms && <p className="mt-1 text-sm text-red-600">{errors.acceptTerms}</p>}
               </div>
             </div>
 
+            <p className='font-normal text-[16px] font-nunito text-[#4A4A4A]'>* Champs Obligatoires</p>
+
             {/* Bouton de soumission */}
             <div className="flex justify-center">
               <button
                 type="submit"
-                className="flex px-[30px] py-[15px] justify-center items-center gap-[10px] rounded-full text-[18px] font-bold bg-[#FFBC33] text-[#4A4A4A] font-nunito focus:outline-none focus:ring-1 focus:ring-[#FFBC33]"
+                className="flex px-[30px] py-[15px] justify-center items-center gap-[10px] rounded-full text-[18px] font-bold bg-[#FFBC33] text-[#4A4A4A] font-nunito focus:outline-none focus:ring-1 focus:ring-[#FFBC33] cursor-pointer hover:bg-[#E5A92E]"
               >
                 Demander la récupération
               </button>
             </div>
-
-            
           </form>
         </div>
       </div>

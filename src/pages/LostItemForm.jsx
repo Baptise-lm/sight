@@ -47,15 +47,7 @@ const LostItemForm = () => {
     try {
       const { data, error } = await supabase
         .from('new_items_found')
-        .insert([
-          {
-            name: formData.name,
-            category: formData.category,
-            description: formData.description,
-            found_date: formData.found_date,
-            found_location: formData.found_location
-          }
-        ]);
+        .insert([formData]);
 
       if (error) {
         throw error;
@@ -152,7 +144,7 @@ const LostItemForm = () => {
                 {errors.found_location && <p className="mt-1 text-sm text-red-600">{errors.found_location}</p>}
               </div>
             </div>
-            
+
             {/* Date */}
             <div className="flex flex-col gap-4">
               <label htmlFor="found_date" className="text-[20px] text-[#4A4A4A] mb-1 font-nunito font-normal">
@@ -215,11 +207,11 @@ const LostItemForm = () => {
             <p className='font-normal text-[16px] font-nunito text-[#4A4A4A]'>* Champs Obligatoires</p>
 
             {/* Bouton de soumission */}
-            <div className="flex justify-center items-center ">
+            <div className="flex justify-center items-center">
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className={`flex px-[30px] py-[15px] justify-center items-center gap-[10px] rounded-full text-[18px] font-bold bg-[#FFBC33] transition-colors text-[#4A4A4A] font-nunito ${isSubmitting ? 'bg-gray-400' : 'bg-[#FFBC33]'} focus:outline-none focus:ring-1 focus:ring-[#FFBC33]`}
+                className={`flex px-[30px] py-[15px] justify-center items-center gap-[10px] rounded-full text-[18px] font-bold transition-colors text-[#4A4A4A] font-nunito cursor-pointer ${isSubmitting ? 'bg-gray-400' : 'bg-[#FFBC33] hover:bg-[#E5A92E]'} focus:outline-none focus:ring-1 focus:ring-[#FFBC33]`}
               >
                 {isSubmitting ? 'Enregistrement...' : 'Valider'}
               </button>

@@ -1,11 +1,14 @@
-import { useNavigate } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { supabase } from '../utils/supabase';
 import { FaBox, FaTag, FaMapMarker } from 'react-icons/fa';
+import ItemDetailModal from '../components/ItemManage/ItemDetailModal'; // Assurez-vous d'importer le composant modal
 
 const HomePage = () => {
   const navigate = useNavigate();
   const [usersWithItems, setUsersWithItems] = useState([]);
+  const [selectedItem, setSelectedItem] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const fetchUsersWithItems = async () => {
@@ -46,6 +49,16 @@ const HomePage = () => {
     navigate('/lost-item-form');
   };
 
+  const handleItemClick = (item) => {
+    setSelectedItem(item);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedItem(null);
+  };
+
   return (
     <div className="min-h-screen bg-[#FFFDF5] py-12 px-4 mb-10 font-nunito">
       <div className="max-w-4xl mx-auto text-center">
@@ -63,14 +76,14 @@ const HomePage = () => {
         <div className="flex flex-col sm:flex-row justify-center gap-12">
           <button
             onClick={handleFoundItemClick}
-            className="flex px-[30px] py-[15px] justify-center items-center gap-[10px] rounded-full text-[18px] font-bold bg-[#FFBC33] transition-colors text-[#4A4A4A] font-nunito"
+            className="flex px-[30px] py-[15px] justify-center items-center gap-[10px] rounded-full text-[18px] font-bold bg-[#FFBC33] transition-colors text-[#4A4A4A] font-nunito cursor-pointer hover:bg-[#E5A92E]"
           >
             Objet trouvé
           </button>
 
           <button
             onClick={handleLostItemClick}
-            className="flex px-[30px] py-[15px] justify-center items-center gap-[10px] rounded-full text-[18px] font-bold bg-[#FFBC33] transition-colors text-[#4A4A4A] font-nunito"
+            className="flex px-[30px] py-[15px] justify-center items-center gap-[10px] rounded-full text-[18px] font-bold bg-[#FFBC33] transition-colors text-[#4A4A4A] font-nunito cursor-pointer hover:bg-[#E5A92E]"
           >
             Objet perdu
           </button>
@@ -153,9 +166,13 @@ const HomePage = () => {
         {/* Cards en colonne */}
         <div className="flex flex-col items-center gap-9 max-w-[900px] mx-auto">
           {usersWithItems.map((item, index) => (
-            <div key={index} className="bg-[#FBF7F2] rounded-full p-4 w-full border border-[#FFBC33]">
+            <div
+              key={index}
+              className="bg-[#FBF7F2] rounded-full p-4 w-full border border-[#FFBC33] cursor-pointer hover:bg-[#E5A92E]"
+              onClick={() => handleItemClick(item)}
+            >
               <div className="flex items-center gap-6 ml-[20px]">
-                <p className=" items-center text-[18px] font-bold text-[#4A4A4A] font-baloo">
+                <p className="items-center text-[18px] font-bold text-[#4A4A4A] font-baloo">
                   {item.users?.username || 'Utilisateur inconnu'} a ramené :
                 </p>
 
@@ -172,6 +189,14 @@ const HomePage = () => {
           ))}
         </div>
       </div>
+
+      {/* Modal pour les détails de l'item */}
+      {isModalOpen && selectedItem && (
+        <ItemDetailModal
+          item={selectedItem}
+          onClose={closeModal}
+        />
+      )}
     </div>
   );
 };

@@ -50,7 +50,7 @@ const Footer = () => {
               </Link>
             </li>
             <li>
-              <Link to="/terms" className="flex items-center text-[#4A4A4A] font-bold transition-colors">
+              <Link to="/rgpd" className="flex items-center text-[#4A4A4A] font-bold transition-colors">
                 <span>Conditions générales</span>
               </Link>
             </li>

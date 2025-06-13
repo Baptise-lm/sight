@@ -185,7 +185,7 @@ const SortableItemList = () => {
             placeholder="Rechercher un objet..."
             value={searchTerm}
             onChange={handleSearchChange}
-            className="bg-[#FBF7F2] rounded-full p-5 pl-10 w-full text-[16px] text-[#4A4A4A] font-nunito font-normal italic focus:outline-none focus:ring-1 focus:ring-[#FFBC33] placeholder-gray-300"
+            className="bg-[#FBF7F2] rounded-full p-5 pl-10 w-full text-[16px] text-[#4A4A4A] font-nunito font-normal italic focus:outline-none focus:ring-1 focus:ring-[#FFBC33] placeholder-gray-300 cursor-pointer"
           />
         </div>
 
@@ -196,7 +196,7 @@ const SortableItemList = () => {
               <select
                 value={sortBy}
                 onChange={handleSortChange}
-                className="bg-[#FBF7F2] rounded-full p-5 w-full border border-[#FFBC33] text-[16px] text-[#4A4A4A] font-nunito font-normal italic focus:outline-none focus:ring-1 focus:ring-[#FFBC33]"
+                className="bg-[#FBF7F2] rounded-full p-5 w-full border border-[#FFBC33] text-[16px] text-[#4A4A4A] font-nunito font-normal italic focus:outline-none focus:ring-1 focus:ring-[#FFBC33] cursor-pointer hover:bg-[#E5A92E]"
               >
                 <option value="name">Nom</option>
                 <option value="category">Catégorie</option>
@@ -212,7 +212,7 @@ const SortableItemList = () => {
               <select
                 value={sortOrder}
                 onChange={handleOrderChange}
-                className="bg-[#FBF7F2] rounded-full p-5 w-full border border-[#FFBC33] text-[16px] text-[#4A4A4A] font-nunito font-normal italic focus:outline-none focus:ring-1 focus:ring-[#FFBC33]"
+                className="bg-[#FBF7F2] rounded-full p-5 w-full border border-[#FFBC33] text-[16px] text-[#4A4A4A] font-nunito font-normal italic focus:outline-none focus:ring-1 focus:ring-[#FFBC33] cursor-pointer hover:bg-[#E5A92E]"
               >
                 <option value="asc">Croissant</option>
                 <option value="desc">Décroissant</option>
@@ -225,7 +225,7 @@ const SortableItemList = () => {
               <select
                 value={selectedCategory}
                 onChange={handleCategoryChange}
-                className="bg-[#FBF7F2] rounded-full p-5 w-full border border-[#FFBC33] text-[16px] text-[#4A4A4A] font-nunito font-normal italic focus:outline-none focus:ring-1 focus:ring-[#FFBC33]"
+                className="bg-[#FBF7F2] rounded-full p-5 w-full border border-[#FFBC33] text-[16px] text-[#4A4A4A] font-nunito font-normal italic focus:outline-none focus:ring-1 focus:ring-[#FFBC33] cursor-pointer hover:bg-[#E5A92E]"
               >
                 <option value="">Toutes les catégories</option>
                 {categories.map(category => (
@@ -240,7 +240,7 @@ const SortableItemList = () => {
               <select
                 value={selectedVille}
                 onChange={handleVilleChange}
-                className="bg-[#FBF7F2] rounded-full p-5 w-full border border-[#FFBC33] text-[16px] text-[#4A4A4A] font-nunito font-normal italic focus:outline-none focus:ring-1 focus:ring-[#FFBC33]"
+                className="bg-[#FBF7F2] rounded-full p-5 w-full border border-[#FFBC33] text-[16px] text-[#4A4A4A] font-nunito font-normal italic focus:outline-none focus:ring-1 focus:ring-[#FFBC33] cursor-pointer hover:bg-[#E5A92E]"
               >
                 <option value="">Toutes les villes</option>
                 {villes.map(ville => (
@@ -253,7 +253,7 @@ const SortableItemList = () => {
           <div className="flex items-center">
             <button
               onClick={resetFilters}
-              className="flex h-[57px] px-[36px] py-[20px] justify-center items-center gap-[10px] rounded-full text-[18px] font-bold bg-[#FFBC33] text-[#4A4A4A] font-nunito focus:outline-none focus:ring-1 focus:ring-[#FFBC33]"
+              className="flex h-[57px] px-[36px] py-[20px] justify-center items-center gap-[10px] rounded-full text-[18px] font-bold bg-[#FFBC33] text-[#4A4A4A] font-nunito focus:outline-none focus:ring-1 focus:ring-[#FFBC33] cursor-pointer hover:bg-[#E5A92E]"
             >
               Réinitialiser
             </button>
@@ -266,7 +266,7 @@ const SortableItemList = () => {
               <select
                 value={selectedEtablissement}
                 onChange={handleEtablissementChange}
-                className="bg-[#FBF7F2] rounded-full p-5 w-full border border-[#FFBC33] text-[16px] text-[#4A4A4A] font-nunito font-normal italic focus:outline-none focus:ring-1 focus:ring-[#FFBC33]"
+                className="bg-[#FBF7F2] rounded-full p-5 w-full border border-[#FFBC33] text-[16px] text-[#4A4A4A] font-nunito font-normal italic focus:outline-none focus:ring-1 focus:ring-[#FFBC33] cursor-pointer hover:bg-[#E5A92E]"
               >
                 <option value="">Tous les établissements</option>
                 {etablissements.map(etablissement => (
@@ -283,7 +283,7 @@ const SortableItemList = () => {
             items.map(item => (
               <div
                 key={item.id}
-                className="bg-[#FBF7F2] rounded-full p-4 w-full border border-[#FFBC33] cursor-pointer hover:shadow-lg transition-shadow"
+                className="bg-[#FBF7F2] rounded-full p-4 w-full border border-[#FFBC33] cursor-pointer transition-shadow hover:bg-[#E5A92E]"
                 onClick={() => handleItemClick(item)}
               >
                 <div className="flex items-center gap-6 ml-[20px]">

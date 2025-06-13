@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import Map from '../components/Map';
 import { FaSearch, FaFilter } from 'react-icons/fa';
 import { pinsData, citiesData, categoriesData } from '../utils/MapData';
-import { useNavigate } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 
 const MapPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -107,7 +107,7 @@ const MapPage = () => {
             placeholder="Rechercher un lieu..."
             value={searchTerm}
             onChange={handleSearchChange}
-            className="bg-[#FBF7F2] rounded-full p-5 pl-10 w-full text-[16px] text-[#4A4A4A] font-nunito font-normal italic focus:outline-none focus:ring-1 focus:ring-[#FFBC33] placeholder-gray-300"
+            className="bg-[#FBF7F2] rounded-full p-5 pl-10 w-full text-[16px] text-[#4A4A4A] font-nunito font-normal italic focus:outline-none focus:ring-1 focus:ring-[#FFBC33] placeholder-gray-300 cursor-pointer"
           />
         </div>
 
@@ -118,7 +118,7 @@ const MapPage = () => {
               <select
                 value={selectedCity}
                 onChange={handleCityChange}
-                className="bg-[#FBF7F2] rounded-full p-5 w-full border border-[#FFBC33] text-[16px] text-[#4A4A4A] font-nunito font-normal italic focus:outline-none focus:ring-1 focus:ring-[#FFBC33]"
+                className="bg-[#FBF7F2] rounded-full p-5 w-full border border-[#FFBC33] text-[16px] text-[#4A4A4A] font-nunito font-normal italic focus:outline-none focus:ring-1 focus:ring-[#FFBC33] cursor-pointer hover:bg-[#E5A92E]"
               >
                 <option value="">Toutes les villes</option>
                 {citiesData.map(city => (
@@ -134,7 +134,7 @@ const MapPage = () => {
               <select
                 value={selectedCategory}
                 onChange={handleCategoryChange}
-                className="bg-[#FBF7F2] rounded-full p-5 w-full border border-[#FFBC33] text-[16px] text-[#4A4A4A] font-nunito font-normal italic focus:outline-none focus:ring-1 focus:ring-[#FFBC33]"
+                className="bg-[#FBF7F2] rounded-full p-5 w-full border border-[#FFBC33] text-[16px] text-[#4A4A4A] font-nunito font-normal italic focus:outline-none focus:ring-1 focus:ring-[#FFBC33] cursor-pointer hover:bg-[#E5A92E]"
               >
                 <option value="">Toutes les catégories</option>
                 {categoriesData.map(category => (
@@ -148,7 +148,7 @@ const MapPage = () => {
           <div className="flex items-center">
             <button
               onClick={resetFilters}
-              className="flex px-[36px] py-[20px] justify-center items-center gap-[10px] rounded-full text-[18px] font-bold bg-[#FFBC33] text-[#4A4A4A] font-nunito focus:outline-none focus:ring-1 focus:ring-[#FFBC33]"
+              className="flex px-[36px] py-[20px] justify-center items-center gap-[10px] rounded-full text-[18px] font-bold bg-[#FFBC33] text-[#4A4A4A] font-nunito focus:outline-none focus:ring-1 focus:ring-[#FFBC33] cursor-pointer hover:bg-[#E5A92E]"
             >
               Réinitialiser
             </button>
@@ -158,13 +158,12 @@ const MapPage = () => {
           <div className="flex justify-center">
             <button
               onClick={applyFilters}
-              className="flex px-[36px] py-[20px] justify-center items-center gap-[10px] rounded-full text-[18px] font-bold bg-[#FFBC33] text-[#4A4A4A] font-nunito focus:outline-none focus:ring-1 focus:ring-[#FFBC33]"
+              className="flex px-[36px] py-[20px] justify-center items-center gap-[10px] rounded-full text-[18px] font-bold bg-[#FFBC33] text-[#4A4A4A] font-nunito focus:outline-none focus:ring-1 focus:ring-[#FFBC33] cursor-pointer hover:bg-[#E5A92E]"
             >
               Appliquer les filtres
             </button>
           </div>
         </div>
-
 
         {/* Conteneur pour la carte */}
         <div className="flex justify-center mb-16">
@@ -193,7 +192,7 @@ const MapPage = () => {
           <div className="flex flex-col sm:flex-row justify-center gap-12">
             <button
               onClick={handleLostItemClick}
-              className="flex px-[30px] py-[15px] justify-center items-center gap-[10px] rounded-full text-[18px] font-bold bg-[#FFBC33] transition-colors text-[#4A4A4A] font-nunito"
+              className="flex px-[30px] py-[15px] justify-center items-center gap-[10px] rounded-full text-[18px] font-bold bg-[#FFBC33] text-[#4A4A4A] font-nunito cursor-pointer hover:bg-[#E5A92E]"
             >
               Objet perdu
             </button>
