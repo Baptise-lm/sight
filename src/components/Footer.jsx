@@ -55,8 +55,8 @@ const Footer = () => {
               </Link>
             </li>
             <li>
-              <Link to="/terms" className="flex items-center text-[#4A4A4A] font-bold transition-colors">
-                <span>Termes et conditions</span>
+              <Link to="/guide" className="flex items-center text-[#4A4A4A] font-bold transition-colors">
+                <span>Guide du site</span>
               </Link>
             </li>
           </ul>
