@@ -84,9 +84,13 @@ const LostItemForm = () => {
   return (
     <div className="min-h-screen bg-gray-50 py-12 px-4">
       <div className="max-w-[1100px] mx-auto">
-        <h1 className="text-[38px] font-bold mb-8 text-center text-gray-900">
-          Formulaire pour signaler que tu as trouvé un objet
+        <h1 className="text-[36px] font-bold mb-8 text-center text-[#4A4A4A] font-baloo">
+          Signaler un objet perdu
         </h1>
+
+        <p className="text-center text-[#4A4A4A] mb-6 text-[18px] font-nunito">
+          Veuillez remplir ce formulaire pour nous aider à retrouver votre objet. Plus vous donnez de détails, plus il sera facile de le faire correspondre à un objet trouvé enregistré sur la plateforme.
+        </p>
 
         {/* Messages */}
         <div className="mb-6">
@@ -110,11 +114,11 @@ const LostItemForm = () => {
         </div>
 
         <div className="p-8">
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={handleSubmit} className="flex flex-col gap-8">
             {/* Nom */}
-            <div>
-              <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
-                Nom de l'objet
+            <div className="flex flex-col gap-4">
+              <label htmlFor="name" className="text-[20px] text-[#4A4A4A] font-nunito font-normal">
+                Nom de l'objet * :
               </label>
               <div className="relative">
                 <input
@@ -124,16 +128,53 @@ const LostItemForm = () => {
                   value={formData.name}
                   onChange={handleChange}
                   placeholder="Insérer le nom de l'objet"
-                  className={`block w-full px-3 py-2 border rounded-md placeholder-gray-300 ${errors.name ? 'border-red-500' : 'border-gray-300'} focus:outline-none focus:ring-1 focus:ring-gray-500`}
+                  className={`bg-[#FBF7F2] rounded-full p-5 w-full border text-[16px] text-[#4A4A4A] font-nunito font-normal italic ${errors.name ? 'border-red-500' : 'border-[#FFBC33]'} focus:outline-none focus:ring-1 focus:ring-[#FFBC33]`}
                 />
                 {errors.name && <p className="mt-1 text-sm text-red-600">{errors.name}</p>}
               </div>
             </div>
 
+            {/* Lieu */}
+            <div className="flex flex-col gap-4">
+              <label htmlFor="found_location" className="text-[20px] text-[#4A4A4A] font-nunito font-normal">
+                Lieu de la perte * :
+              </label>
+              <div className="relative">
+                <input
+                  type="text"
+                  id="found_location"
+                  name="found_location"
+                  value={formData.found_location}
+                  onChange={handleChange}
+                  placeholder="Insérer le lieu où l'objet a été trouvé"
+                  className={`bg-[#FBF7F2] rounded-full p-5 w-full border text-[16px] text-[#4A4A4A] font-nunito font-normal italic ${errors.found_location ? 'border-red-500' : 'border-[#FFBC33]'} focus:outline-none focus:ring-1 focus:ring-[#FFBC33]`}
+                />
+                {errors.found_location && <p className="mt-1 text-sm text-red-600">{errors.found_location}</p>}
+              </div>
+            </div>
+            
+            {/* Date */}
+            <div className="flex flex-col gap-4">
+              <label htmlFor="found_date" className="text-[20px] text-[#4A4A4A] mb-1 font-nunito font-normal">
+                Date de découverte estimé * :
+              </label>
+              <div className="relative">
+                <input
+                  type="date"
+                  id="found_date"
+                  name="found_date"
+                  value={formData.found_date}
+                  onChange={handleChange}
+                  className={`bg-[#FBF7F2] rounded-full p-5 w-full border text-[16px] text-[#4A4A4A] font-nunito font-normal italic ${errors.found_location ? 'border-red-500' : 'border-[#FFBC33]'} focus:outline-none focus:ring-1 focus:ring-[#FFBC33]`}
+                />
+                {errors.found_date && <p className="mt-1 text-sm text-red-600">{errors.found_date}</p>}
+              </div>
+            </div>
+
             {/* Catégorie */}
-            <div>
-              <label htmlFor="category" className="block text-sm font-medium text-gray-700 mb-1">
-                Catégorie
+            <div className="flex flex-col gap-5">
+              <label htmlFor="category" className="text-[20px] text-[#4A4A4A] mb-1 font-nunito font-normal">
+                Catégorie * :
               </label>
               <div className="relative">
                 <select
@@ -141,7 +182,7 @@ const LostItemForm = () => {
                   name="category"
                   value={formData.category}
                   onChange={handleChange}
-                  className={`block w-full px-3 py-2 border rounded-md ${errors.category ? 'border-red-500' : 'border-gray-300'} focus:outline-none focus:ring-1 focus:ring-gray-500`}
+                  className={`bg-[#FBF7F2] rounded-full p-5 w-full border text-[16px] text-[#4A4A4A] font-nunito font-normal italic ${errors.found_location ? 'border-red-500' : 'border-[#FFBC33]'} focus:outline-none focus:ring-1 focus:ring-[#FFBC33]`}
                 >
                   <option value="">Sélectionner une catégorie</option>
                   <option value="Téléphone">Téléphone</option>
@@ -156,9 +197,9 @@ const LostItemForm = () => {
             </div>
 
             {/* Description */}
-            <div>
-              <label htmlFor="description" className="block text-sm font-medium text-gray-700 mb-1">
-                Description
+            <div className="flex flex-col gap-4">
+              <label htmlFor="description" className="text-[20px] text-[#4A4A4A] mb-1 font-nunito font-normal">
+                Informations additionnelles :
               </label>
               <textarea
                 id="description"
@@ -167,55 +208,20 @@ const LostItemForm = () => {
                 value={formData.description}
                 onChange={handleChange}
                 placeholder="Décrivez l'objet trouvé"
-                className="block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-500"
+                className="bg-[#FBF7F2] w-full p-5 border border-[#FFBC33] rounded-[20px] text-[16px] font-nunito font-normal italic placeholder-gray-300 focus:outline-none focus:ring-1 focus:ring-[#FFBC33]"
               ></textarea>
             </div>
 
-            {/* Date */}
-            <div>
-              <label htmlFor="found_date" className="block text-sm font-medium text-gray-700 mb-1">
-                Date de découverte
-              </label>
-              <div className="relative">
-                <input
-                  type="date"
-                  id="found_date"
-                  name="found_date"
-                  value={formData.found_date}
-                  onChange={handleChange}
-                  className={`block w-full px-3 py-2 border rounded-md ${errors.found_date ? 'border-red-500' : 'border-gray-300'} focus:outline-none focus:ring-1 focus:ring-gray-500`}
-                />
-                {errors.found_date && <p className="mt-1 text-sm text-red-600">{errors.found_date}</p>}
-              </div>
-            </div>
-
-            {/* Lieu */}
-            <div>
-              <label htmlFor="found_location" className="block text-sm font-medium text-gray-700 mb-1">
-                Lieu de découverte
-              </label>
-              <div className="relative">
-                <input
-                  type="text"
-                  id="found_location"
-                  name="found_location"
-                  value={formData.found_location}
-                  onChange={handleChange}
-                  placeholder="Insérer le lieu où l'objet a été trouvé"
-                  className={`block w-full px-3 py-2 border rounded-md placeholder-gray-300 ${errors.found_location ? 'border-red-500' : 'border-gray-300'} focus:outline-none focus:ring-1 focus:ring-gray-500`}
-                />
-                {errors.found_location && <p className="mt-1 text-sm text-red-600">{errors.found_location}</p>}
-              </div>
-            </div>
+            <p className='font-normal text-[16px] font-nunito text-[#4A4A4A]'>* Champs Obligatoires</p>
 
             {/* Bouton de soumission */}
-            <div className="flex justify-center">
+            <div className="flex justify-center items-center ">
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className={`px-6 py-3 rounded-md text-white transition-colors ${isSubmitting ? 'bg-gray-400' : 'bg-gray-600 hover:bg-gray-700'} focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2`}
+                className={`flex px-[45px] py-[25px] justify-center items-center gap-[10px] rounded-full text-[18px] font-bold bg-[#FFBC33] transition-colors text-[#4A4A4A] font-nunito ${isSubmitting ? 'bg-gray-400' : 'bg-[#FFBC33]'} focus:outline-none focus:ring-1 focus:ring-[#FFBC33]`}
               >
-                {isSubmitting ? 'Enregistrement...' : 'Enregistrer l\'objet'}
+                {isSubmitting ? 'Enregistrement...' : 'Valider'}
               </button>
             </div>
           </form>

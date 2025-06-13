@@ -1,8 +1,7 @@
-// src/components/SortableItemList.jsx
 import React, { useEffect, useState } from 'react';
 import { supabase } from '../../utils/supabase';
 import ItemDetailModal from './ItemDetailModal';
-import { FaSearch, FaBox, FaFilter } from 'react-icons/fa';
+import { FaSearch, FaBox } from 'react-icons/fa';
 
 const SortableItemList = () => {
   const [items, setItems] = useState([]);
@@ -49,7 +48,6 @@ const SortableItemList = () => {
         )
       `);
 
-    // Filtres
     if (selectedCategory) {
       query = query.eq('category_id', selectedCategory);
     }
@@ -62,7 +60,6 @@ const SortableItemList = () => {
       query = query.eq('etablissements.villes.id', selectedVille);
     }
 
-    // Tri
     if (sortBy === 'category') {
       query = query.order('category_id', { ascending: sortOrder === 'asc' });
     } else if (sortBy === 'ville') {
@@ -173,40 +170,33 @@ const SortableItemList = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 py-12 px-4">
-      <div className="max-w-7xl mx-auto mb-16">
-        <h1 className="text-[38px] font-bold mb-8 text-center text-gray-900">
+      <div className="max-w-[1100px] mx-auto">
+        <h1 className="text-[36px] font-bold mb-8 text-center text-[#4A4A4A] font-baloo">
           Liste triable des objets
         </h1>
 
         {/* Barre de recherche */}
-        <div className="max-w-[1100px] mb-6 mx-auto">
-          <div className="relative">
-            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <FaSearch className="h-5 w-5 text-gray-400" />
-            </div>
-            <input
-              type="text"
-              placeholder="Rechercher..."
-              value={searchTerm}
-              onChange={handleSearchChange}
-              className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-gray-500 focus:border-gray-500"
-            />
+        <div className="relative flex-1 mb-7">
+          <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+            <FaSearch className="text-gray-400" />
           </div>
+          <input
+            type="text"
+            placeholder="Rechercher un objet..."
+            value={searchTerm}
+            onChange={handleSearchChange}
+            className="bg-[#FBF7F2] rounded-full p-5 pl-10 w-full text-[16px] text-[#4A4A4A] font-nunito font-normal italic focus:outline-none focus:ring-1 focus:ring-[#FFBC33] placeholder-gray-300"
+          />
         </div>
 
         {/* Filtres */}
-        <div className="bg-white rounded-lg shadow-md p-6 mb-8 max-w-[1100px] mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-            {/* Tri par */}
-            <div>
-              <label htmlFor="sortBy" className="block text-sm font-medium text-gray-700 mb-1">
-                Trier par
-              </label>
+        <div className='flex flex-row gap-4 mb-7'>
+          <div className="flex-1">
+            <div className="relative">
               <select
-                id="sortBy"
                 value={sortBy}
                 onChange={handleSortChange}
-                className="block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-gray-500 focus:border-gray-500"
+                className="bg-[#FBF7F2] rounded-full p-5 w-full border border-[#FFBC33] text-[16px] text-[#4A4A4A] font-nunito font-normal italic focus:outline-none focus:ring-1 focus:ring-[#FFBC33]"
               >
                 <option value="name">Nom</option>
                 <option value="category">Catégorie</option>
@@ -215,33 +205,27 @@ const SortableItemList = () => {
                 <option value="found_date">Date</option>
               </select>
             </div>
+          </div>
 
-            {/* Ordre */}
-            <div>
-              <label htmlFor="sortOrder" className="block text-sm font-medium text-gray-700 mb-1">
-                Ordre
-              </label>
+          <div className="flex-1">
+            <div className="relative">
               <select
-                id="sortOrder"
                 value={sortOrder}
                 onChange={handleOrderChange}
-                className="block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-gray-500 focus:border-gray-500"
+                className="bg-[#FBF7F2] rounded-full p-5 w-full border border-[#FFBC33] text-[16px] text-[#4A4A4A] font-nunito font-normal italic focus:outline-none focus:ring-1 focus:ring-[#FFBC33]"
               >
                 <option value="asc">Croissant</option>
                 <option value="desc">Décroissant</option>
               </select>
             </div>
+          </div>
 
-            {/* Catégorie */}
-            <div>
-              <label htmlFor="category" className="block text-sm font-medium text-gray-700 mb-1">
-                Catégorie
-              </label>
+          <div className="flex-1">
+            <div className="relative">
               <select
-                id="category"
                 value={selectedCategory}
                 onChange={handleCategoryChange}
-                className="block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-gray-500 focus:border-gray-500"
+                className="bg-[#FBF7F2] rounded-full p-5 w-full border border-[#FFBC33] text-[16px] text-[#4A4A4A] font-nunito font-normal italic focus:outline-none focus:ring-1 focus:ring-[#FFBC33]"
               >
                 <option value="">Toutes les catégories</option>
                 {categories.map(category => (
@@ -249,17 +233,14 @@ const SortableItemList = () => {
                 ))}
               </select>
             </div>
+          </div>
 
-            {/* Ville */}
-            <div>
-              <label htmlFor="ville" className="block text-sm font-medium text-gray-700 mb-1">
-                Ville
-              </label>
+          <div className="flex-1">
+            <div className="relative">
               <select
-                id="ville"
                 value={selectedVille}
                 onChange={handleVilleChange}
-                className="block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-gray-500 focus:border-gray-500"
+                className="bg-[#FBF7F2] rounded-full p-5 w-full border border-[#FFBC33] text-[16px] text-[#4A4A4A] font-nunito font-normal italic focus:outline-none focus:ring-1 focus:ring-[#FFBC33]"
               >
                 <option value="">Toutes les villes</option>
                 {villes.map(ville => (
@@ -267,66 +248,58 @@ const SortableItemList = () => {
                 ))}
               </select>
             </div>
+          </div>
 
-            {/* Établissement */}
-            {selectedVille && (
-              <div className="md:col-span-4">
-                <label htmlFor="etablissement" className="block text-sm font-medium text-gray-700 mb-1">
-                  Établissement
-                </label>
-                <select
-                  id="etablissement"
-                  value={selectedEtablissement}
-                  onChange={handleEtablissementChange}
-                  className="block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-gray-500 focus:border-gray-500"
-                >
-                  <option value="">Tous les établissements</option>
-                  {etablissements.map(etablissement => (
-                    <option key={etablissement.id} value={etablissement.id}>{etablissement.nom}</option>
-                  ))}
-                </select>
-              </div>
-            )}
-
-            {/* Bouton de réinitialisation */}
-            <div className="flex justify-end md:col-span-4">
-              <button
-                type="button"
-                onClick={resetFilters}
-                className="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition-colors"
-              >
-                Réinitialiser les filtres
-              </button>
-            </div>
+          <div className="flex items-center">
+            <button
+              onClick={resetFilters}
+              className="flex h-[57px] px-[36px] py-[20px] justify-center items-center gap-[10px] rounded-full text-[18px] font-bold bg-[#FFBC33] text-[#4A4A4A] font-nunito focus:outline-none focus:ring-1 focus:ring-[#FFBC33]"
+            >
+              Réinitialiser
+            </button>
           </div>
         </div>
 
+        {selectedVille && (
+          <div className="mb-4">
+            <div className="relative">
+              <select
+                value={selectedEtablissement}
+                onChange={handleEtablissementChange}
+                className="bg-[#FBF7F2] rounded-full p-5 w-full border border-[#FFBC33] text-[16px] text-[#4A4A4A] font-nunito font-normal italic focus:outline-none focus:ring-1 focus:ring-[#FFBC33]"
+              >
+                <option value="">Tous les établissements</option>
+                {etablissements.map(etablissement => (
+                  <option key={etablissement.id} value={etablissement.id}>{etablissement.nom}</option>
+                ))}
+              </select>
+            </div>
+          </div>
+        )}
+
         {/* Liste des items */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-[1100px] mx-auto">
+        <div className="flex flex-col items-center gap-9 mx-auto mb-16">
           {items.length > 0 ? (
             items.map(item => (
               <div
                 key={item.id}
-                className="bg-white p-4 rounded-lg shadow-md cursor-pointer hover:shadow-lg transition-shadow"
+                className="bg-[#FBF7F2] rounded-full p-4 w-full border border-[#FFBC33] cursor-pointer hover:shadow-lg transition-shadow"
                 onClick={() => handleItemClick(item)}
               >
-                <div className="flex items-center">
-                  <div className="mr-4">
-                    <FaBox className="h-6 w-6 text-gray-400" />
-                  </div>
-                  <div className="flex-1">
-                    <p className="text-gray-900 font-medium">
-                      {item.name} - {item.categories?.nom || 'Catégorie inconnue'}
-                    </p>
-                    <p className="text-gray-500 text-sm">
-                      {item.etablissements?.villes?.nom || 'Ville inconnue'}
-                    </p>
+                <div className="flex items-center gap-6 ml-[20px]">
+                  <div className="flex items-center gap-4">
+                    <FaBox className="text-[#4A4A4A]" />
+                    <span className="text-[18px] text-[#4A4A4A] font-nunito">{item.name}</span>
+                    <span className='text-[18px] font-nunito'>-</span>
+                    <span className="text-[18px] text-[#4A4A4A] font-nunito">{item.categories?.nom || 'Catégorie inconnue'}</span>
+                    <span className='text-[18px] font-nunito'>-</span>
+                    <span className="text-[18px] text-[#4A4A4A] font-nunito">{item.etablissements?.villes?.nom || 'Ville inconnue'}</span>
                   </div>
                 </div>
               </div>
             ))
           ) : (
-            <p className="text-gray-600 col-span-full text-center">Aucun objet trouvé.</p>
+            <p className="text-[#4A4A4A] text-center">Aucun objet trouvé.</p>
           )}
         </div>
 

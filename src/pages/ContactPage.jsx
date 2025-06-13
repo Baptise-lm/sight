@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { FaCheckCircle, FaExclamationTriangle } from 'react-icons/fa';
 
 const ContactPage = () => {
-  // État pour les champs du formulaire
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -14,16 +13,12 @@ const ContactPage = () => {
     acceptTerms: false
   });
 
-  // État pour les erreurs
   const [errors, setErrors] = useState({});
-  // État pour le message de succès
   const [successMessage, setSuccessMessage] = useState('');
 
-  // Regex pour la validation
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const phoneRegex = /^(\+33|0)[1-9](\d{2}){4}$/;
 
-  // Gestion des changements dans les champs
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setFormData({
@@ -32,7 +27,6 @@ const ContactPage = () => {
     });
   };
 
-  // Validation du formulaire
   const validateForm = () => {
     const newErrors = {};
 
@@ -57,16 +51,13 @@ const ContactPage = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  // Soumission du formulaire
   const handleSubmit = (e) => {
     e.preventDefault();
 
     if (validateForm()) {
-      // Simuler l'envoi du formulaire
       setSuccessMessage('Message bien envoyé !');
       setTimeout(() => {
         setSuccessMessage('');
-        // Réinitialiser le formulaire
         setFormData({
           firstName: '',
           lastName: '',
@@ -83,14 +74,13 @@ const ContactPage = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 py-12 px-4">
-      <div className="max-w-4xl mx-auto">
-        <h1 className="text-[38px] font-bold mb-8 text-center text-gray-900">
+      <div className="max-w-[1100px] mx-auto">
+        <h1 className="text-[36px] font-bold mb-8 text-center text-[#4A4A4A] font-baloo">
           Contactez-nous
         </h1>
 
         {/* Conteneur pour les messages */}
         <div className="mb-6">
-          {/* Message de succès */}
           {successMessage && (
             <div className="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-4">
               <div className="flex items-center">
@@ -100,7 +90,6 @@ const ContactPage = () => {
             </div>
           )}
 
-          {/* Message d'erreur global */}
           {Object.keys(errors).length > 0 && (
             <div className="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-4">
               <div className="flex items-center">
@@ -111,116 +100,114 @@ const ContactPage = () => {
           )}
         </div>
 
-        <div className="bg-white rounded-lg shadow-md p-8 mb-16">
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {/* Prénom */}
-              <div>
-                <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-1">
-                  Prénom
-                </label>
-                <input
-                  type="text"
-                  id="firstName"
-                  name="firstName"
-                  value={formData.firstName}
-                  onChange={handleChange}
-                  placeholder="Insérer votre prénom"
-                  className={`block w-full px-3 py-2 border rounded-md placeholder-gray-300 ${errors.firstName ? 'border-red-500' : 'border-gray-300'} focus:outline-none focus:ring-1 focus:ring-gray-500`}
-                />
-                {errors.firstName && <p className="mt-1 text-sm text-red-600">{errors.firstName}</p>}
-              </div>
+        <div className="p-8">
+          <form onSubmit={handleSubmit} className="flex flex-col gap-6">
+            {/* Prénom */}
+            <div className="flex flex-col gap-4">
+              <label htmlFor="firstName" className="text-[20px] text-[#4A4A4A] font-nunito font-normal">
+                Prénom *
+              </label>
+              <input
+                type="text"
+                id="firstName"
+                name="firstName"
+                value={formData.firstName}
+                onChange={handleChange}
+                placeholder="Insérer votre prénom"
+                className={`bg-[#FBF7F2] rounded-full p-5 border text-[16px] text-[#4A4A4A] font-nunito font-normal italic ${errors.firstName ? 'border-red-500' : 'border-[#FFBC33]'} focus:outline-none focus:ring-1 focus:ring-[#FFBC33] placeholder-gray-300`}
+              />
+              {errors.firstName && <p className="mt-1 text-sm text-red-600">{errors.firstName}</p>}
+            </div>
 
-              {/* Nom */}
-              <div>
-                <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 mb-1">
-                  Nom
-                </label>
-                <input
-                  type="text"
-                  id="lastName"
-                  name="lastName"
-                  value={formData.lastName}
-                  onChange={handleChange}
-                  placeholder="Insérer votre nom"
-                  className={`block w-full px-3 py-2 border rounded-md placeholder-gray-300 ${errors.lastName ? 'border-red-500' : 'border-gray-300'} focus:outline-none focus:ring-1 focus:ring-gray-500`}
-                />
-                {errors.lastName && <p className="mt-1 text-sm text-red-600">{errors.lastName}</p>}
-              </div>
+            {/* Nom */}
+            <div className="flex flex-col gap-4">
+              <label htmlFor="lastName" className="text-[20px] text-[#4A4A4A] font-nunito font-normal">
+                Nom *
+              </label>
+              <input
+                type="text"
+                id="lastName"
+                name="lastName"
+                value={formData.lastName}
+                onChange={handleChange}
+                placeholder="Insérer votre nom"
+                className={`bg-[#FBF7F2] rounded-full p-5 border text-[16px] text-[#4A4A4A] font-nunito font-normal italic ${errors.lastName ? 'border-red-500' : 'border-[#FFBC33]'} focus:outline-none focus:ring-1 focus:ring-[#FFBC33] placeholder-gray-300`}
+              />
+              {errors.lastName && <p className="mt-1 text-sm text-red-600">{errors.lastName}</p>}
+            </div>
 
-              {/* Email */}
-              <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-                  Email
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  placeholder="Insérer votre email"
-                  className={`block w-full px-3 py-2 border rounded-md placeholder-gray-300 ${errors.email ? 'border-red-500' : 'border-gray-300'} focus:outline-none focus:ring-1 focus:ring-gray-500`}
-                />
-                {errors.email && <p className="mt-1 text-sm text-red-600">{errors.email}</p>}
-              </div>
+            {/* Email */}
+            <div className="flex flex-col gap-4">
+              <label htmlFor="email" className="text-[20px] text-[#4A4A4A] font-nunito font-normal">
+                Email *
+              </label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                placeholder="Insérer votre email"
+                className={`bg-[#FBF7F2] rounded-full p-5 border text-[16px] text-[#4A4A4A] font-nunito font-normal italic ${errors.email ? 'border-red-500' : 'border-[#FFBC33]'} focus:outline-none focus:ring-1 focus:ring-[#FFBC33] placeholder-gray-300`}
+              />
+              {errors.email && <p className="mt-1 text-sm text-red-600">{errors.email}</p>}
+            </div>
 
-              {/* Téléphone */}
-              <div>
-                <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
-                  Téléphone
-                </label>
-                <input
-                  type="tel"
-                  id="phone"
-                  name="phone"
-                  value={formData.phone}
-                  onChange={handleChange}
-                  placeholder="Insérer votre numéro de téléphone"
-                  className={`block w-full px-3 py-2 border rounded-md placeholder-gray-300 ${errors.phone ? 'border-red-500' : 'border-gray-300'} focus:outline-none focus:ring-1 focus:ring-gray-500`}
-                />
-                {errors.phone && <p className="mt-1 text-sm text-red-600">{errors.phone}</p>}
-              </div>
+            {/* Téléphone */}
+            <div className="flex flex-col gap-4">
+              <label htmlFor="phone" className="text-[20px] text-[#4A4A4A] font-nunito font-normal">
+                Téléphone *
+              </label>
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                value={formData.phone}
+                onChange={handleChange}
+                placeholder="Insérer votre numéro de téléphone"
+                className={`bg-[#FBF7F2] rounded-full p-5 border text-[16px] text-[#4A4A4A] font-nunito font-normal italic ${errors.phone ? 'border-red-500' : 'border-[#FFBC33]'} focus:outline-none focus:ring-1 focus:ring-[#FFBC33] placeholder-gray-300`}
+              />
+              {errors.phone && <p className="mt-1 text-sm text-red-600">{errors.phone}</p>}
+            </div>
 
-              {/* Ville */}
-              <div>
-                <label htmlFor="city" className="block text-sm font-medium text-gray-700 mb-1">
-                  Ville
-                </label>
-                <input
-                  type="text"
-                  id="city"
-                  name="city"
-                  value={formData.city}
-                  onChange={handleChange}
-                  placeholder="Insérer votre ville"
-                  className={`block w-full px-3 py-2 border rounded-md placeholder-gray-300 ${errors.city ? 'border-red-500' : 'border-gray-300'} focus:outline-none focus:ring-1 focus:ring-gray-500`}
-                />
-                {errors.city && <p className="mt-1 text-sm text-red-600">{errors.city}</p>}
-              </div>
+            {/* Ville */}
+            <div className="flex flex-col gap-4">
+              <label htmlFor="city" className="text-[20px] text-[#4A4A4A] font-nunito font-normal">
+                Ville *
+              </label>
+              <input
+                type="text"
+                id="city"
+                name="city"
+                value={formData.city}
+                onChange={handleChange}
+                placeholder="Insérer votre ville"
+                className={`bg-[#FBF7F2] rounded-full p-5 border text-[16px] text-[#4A4A4A] font-nunito font-normal italic ${errors.city ? 'border-red-500' : 'border-[#FFBC33]'} focus:outline-none focus:ring-1 focus:ring-[#FFBC33] placeholder-gray-300`}
+              />
+              {errors.city && <p className="mt-1 text-sm text-red-600">{errors.city}</p>}
+            </div>
 
-              {/* Adresse */}
-              <div>
-                <label htmlFor="address" className="block text-sm font-medium text-gray-700 mb-1">
-                  Adresse
-                </label>
-                <input
-                  type="text"
-                  id="address"
-                  name="address"
-                  value={formData.address}
-                  onChange={handleChange}
-                  placeholder="Insérer votre adresse"
-                  className={`block w-full px-3 py-2 border rounded-md placeholder-gray-300 ${errors.address ? 'border-red-500' : 'border-gray-300'} focus:outline-none focus:ring-1 focus:ring-gray-500`}
-                />
-                {errors.address && <p className="mt-1 text-sm text-red-600">{errors.address}</p>}
-              </div>
+            {/* Adresse */}
+            <div className="flex flex-col gap-4">
+              <label htmlFor="address" className="text-[20px] text-[#4A4A4A] font-nunito font-normal">
+                Adresse *
+              </label>
+              <input
+                type="text"
+                id="address"
+                name="address"
+                value={formData.address}
+                onChange={handleChange}
+                placeholder="Insérer votre adresse"
+                className={`bg-[#FBF7F2] rounded-full p-5 border text-[16px] text-[#4A4A4A] font-nunito font-normal italic ${errors.address ? 'border-red-500' : 'border-[#FFBC33]'} focus:outline-none focus:ring-1 focus:ring-[#FFBC33] placeholder-gray-300`}
+              />
+              {errors.address && <p className="mt-1 text-sm text-red-600">{errors.address}</p>}
             </div>
 
             {/* Message */}
-            <div>
-              <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
-                Message
+            <div className="flex flex-col gap-4">
+              <label htmlFor="message" className="text-[20px] text-[#4A4A4A] font-nunito font-normal">
+                Message *
               </label>
               <textarea
                 id="message"
@@ -229,10 +216,12 @@ const ContactPage = () => {
                 value={formData.message}
                 onChange={handleChange}
                 placeholder="Insérer votre message"
-                className={`block w-full px-3 py-2 border rounded-md placeholder-gray-300 ${errors.message ? 'border-red-500' : 'border-gray-300'} focus:outline-none focus:ring-1 focus:ring-gray-500`}
+                className="bg-[#FBF7F2] w-full p-5 border border-[#FFBC33] rounded-[20px] text-[16px] font-nunito font-normal italic placeholder-gray-300 focus:outline-none focus:ring-1 focus:ring-[#FFBC33]"
               ></textarea>
               {errors.message && <p className="mt-1 text-sm text-red-600">{errors.message}</p>}
             </div>
+
+            <p className='font-normal text-[16px] font-nunito text-[#4A4A4A]'>* Champs Obligatoires</p>
 
             {/* Case à cocher */}
             <div className="flex items-start">
@@ -243,11 +232,11 @@ const ContactPage = () => {
                   type="checkbox"
                   checked={formData.acceptTerms}
                   onChange={handleChange}
-                  className="focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300 rounded"
+                  className="focus:ring-[#FFBC33] h-4 w-4 text-[#FFBC33] border-[#FFBC33] rounded"
                 />
               </div>
               <div className="ml-3 text-sm">
-                <label htmlFor="acceptTerms" className="font-medium text-gray-700">
+                <label htmlFor="acceptTerms" className="font-medium text-[#4A4A4A] font-nunito">
                   J'accepte les conditions générales et la politique de confidentialité*
                 </label>
                 {errors.acceptTerms && <p className="mt-1 text-sm text-red-600">{errors.acceptTerms}</p>}
@@ -255,10 +244,10 @@ const ContactPage = () => {
             </div>
 
             {/* Bouton de soumission */}
-            <div className="flex justify-center">
+            <div className="flex justify-center mt-6">
               <button
                 type="submit"
-                className="px-6 py-3 bg-gray-600 text-white rounded-md hover:bg-gray-700 transition-colors focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
+                className="flex px-[45px] py-[25px] justify-center items-center gap-[10px] rounded-full text-[18px] font-bold bg-[#FFBC33] text-[#4A4A4A] font-nunito focus:outline-none focus:ring-1 focus:ring-[#FFBC33]"
               >
                 Valider
               </button>

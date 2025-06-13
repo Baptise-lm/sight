@@ -1,1 +1,20 @@
 @import "tailwindcss";
+
+@font-face {
+  font-family: 'Nunito';
+  src: url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800&display=swap');
+}
+
+@font-face {
+  font-family: 'Baloo 2';
+  src: url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&display=swap');
+}
+
+@layer utilities {
+  .font-nunito {
+    font-family: 'Nunito', sans-serif;
+  }
+  .font-baloo {
+    font-family: 'Baloo 2', cursive;
+  }
+}

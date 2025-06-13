@@ -3,72 +3,63 @@ import { FaHome, FaMapMarkedAlt, FaQuestionCircle, FaEnvelope, FaFileContract, F
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-100 py-8 px-4">
+    <footer className="bg-[#FFBC33] py-24 px-40">
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row justify-between items-center gap-8 max-w-[1100px] mx-auto">
           {/* Logo */}
           <div className="flex items-center">
-            <div className="w-12 h-12 flex items-center justify-center">
-              <span className="text-xl font-bold">Logo</span>
+            <div className="max-w-36 h-auto flex items-center justify-center">
+              <img src="https://i.ibb.co/6ffD4p8/logo.png" alt="logo" border="0"/>
             </div>
           </div>
 
           {/* Liens principaux */}
-          <div className="flex flex-col items-center md:items-start">
-            <ul className="space-y-2">
-              <li>
-                <Link to="/" className="flex items-center hover:text-gray-600 transition-colors">
-                  <span>Home</span>
-                </Link>
-              </li>
-              <li>
-                <Link to="/lost-item-form" className="flex items-center hover:text-gray-600 transition-colors">
-                  <span>Objet perdu</span>
-                </Link>
-              </li>
-              <li>
-                <Link to="/sortable-items" className="flex items-center hover:text-gray-600 transition-colors">
-                  <span>Objet trouvé</span>
-                </Link>
-              </li>
-              <li>
-                <Link to="/map" className="flex items-center hover:text-gray-600 transition-colors">
-                  <span>Carte interactive</span>
-                </Link>
-              </li>
-            </ul>
-          </div>
+          <ul className="flex flex-col items-center md:items-start space-y-2 gap-5">
+            <li>
+              <Link to="/" className="flex items-center text-[#4A4A4A] font-bold transition-colors">
+                <span>Home</span>
+              </Link>
+            </li>
+            <li>
+              <Link to="/lost-item-form" className="flex items-center text-[#4A4A4A] font-bold transition-colors">
+                <span>Objet perdu</span>
+              </Link>
+            </li>
+            <li>
+              <Link to="/sortable-items" className="flex items-center text-[#4A4A4A] font-bold transition-colors">
+                <span>Objet trouvé</span>
+              </Link>
+            </li>
+            <li>
+              <Link to="/map" className="flex items-center text-[#4A4A4A] font-bold transition-colors">
+                <span>Carte interactive</span>
+              </Link>
+            </li>
+          </ul>
 
           {/* Liens secondaires */}
-          <div className="flex flex-col items-center md:items-start">
-            <ul className="space-y-2">
-              <li>
-                <Link to="/contact" className="flex items-center hover:text-gray-600 transition-colors">
-                  <span>Contact</span>
-                </Link>
-              </li>
-              <li>
-                <Link to="/privacy" className="flex items-center hover:text-gray-600 transition-colors">
-                  <span>Politique de confidentialité</span>
-                </Link>
-              </li>
-              <li>
-                <Link to="/terms" className="flex items-center hover:text-gray-600 transition-colors">
-                  <span>Conditions générales</span>
-                </Link>
-              </li>
-              <li>
-                <Link to="/terms" className="flex items-center hover:text-gray-600 transition-colors">
-                  <span>Termes et conditions</span>
-                </Link>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        {/* Copyright */}
-        <div className="mt-8 pt-8 border-t border-gray-300 text-center text-gray-600">
-          <p>© {new Date().getFullYear()} Objets Trouvés. Tous droits réservés.</p>
+          <ul className="flex flex-col items-center md:items-start space-y-2 gap-5">
+            <li>
+              <Link to="/contact" className="flex items-center text-[#4A4A4A] font-bold transition-colors">
+                <span>Contact</span>
+              </Link>
+            </li>
+            <li>
+              <Link to="/privacy" className="flex items-center text-[#4A4A4A] font-bold transition-colors">
+                <span>Politique de confidentialité</span>
+              </Link>
+            </li>
+            <li>
+              <Link to="/terms" className="flex items-center text-[#4A4A4A] font-bold transition-colors">
+                <span>Conditions générales</span>
+              </Link>
+            </li>
+            <li>
+              <Link to="/terms" className="flex items-center text-[#4A4A4A] font-bold transition-colors">
+                <span>Termes et conditions</span>
+              </Link>
+            </li>
+          </ul>
         </div>
       </div>
     </footer>

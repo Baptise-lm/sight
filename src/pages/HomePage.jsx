@@ -47,31 +47,30 @@ const HomePage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12 px-4">
+    <div className="min-h-screen bg-[#FFFDF5] py-12 px-4 mb-10 font-nunito">
       <div className="max-w-4xl mx-auto text-center">
         {/* Titre principal */}
-        <h1 className="text-[38px] font-bold mb-8 text-gray-900">
-          Explication & Boutons "objet trouvé" & "Objet perdu"
+        <h1 className="text-[36px] font-baloo font-bold mb-8 text-[#4A4A4A]">
+          Vous avez perdu un objet ?
         </h1>
 
         {/* Texte explicatif */}
-        <p className="text-[16px] text-gray-700 mb-12 mx-auto max-w-[1100px]">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-          Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.
+        <p className="text-[18px] text-[#4A4A4A] mb-12 mx-auto max-w-[1100px]">
+          Indiquez-le ici pour lancer votre recherche. Que ce soit dans un lieu public, une entreprise ou un établissement partenaire, notre service centralise les objets trouvés pour vous aider à les retrouver plus rapidement. Commencez par signaler ce que vous avez perdu ou parcourez les objets déjà enregistrés.
         </p>
 
         {/* Boutons */}
-        <div className="flex flex-col sm:flex-row justify-center gap-6">
+        <div className="flex flex-col sm:flex-row justify-center gap-12">
           <button
             onClick={handleFoundItemClick}
-            className="flex h-[57px] px-[30px] py-[20px] justify-center items-center gap-[10px] border border-black text-[16px] font-medium hover:bg-gray-100 transition-colors"
+            className="flex px-[45px] py-[25px] justify-center items-center gap-[10px] rounded-full text-[18px] font-bold bg-[#FFBC33] transition-colors text-[#4A4A4A] font-nunito"
           >
             Objet trouvé
           </button>
 
           <button
             onClick={handleLostItemClick}
-            className="flex h-[57px] px-[30px] py-[20px] justify-center items-center gap-[10px] border border-black text-[16px] font-medium hover:bg-gray-100 transition-colors"
+            className="flex px-[45px] py-[25px] justify-center items-center gap-[10px] rounded-full text-[18px] font-bold bg-[#FFBC33] transition-colors text-[#4A4A4A] font-nunito"
           >
             Objet perdu
           </button>
@@ -79,102 +78,94 @@ const HomePage = () => {
       </div>
 
       {/* Section Fonctionnement */}
-      <div className="mt-[100px] max-w-[1100px] mx-auto px-4">
-        <h2 className="text-[32px] font-bold mb-14 text-center text-gray-900">
-          Fonctionnement et étapes de restitution
+      <div className="flex flex-col gap-18 mt-[120px] max-w-[1100px] mx-auto px-8">
+        <h2 className="text-[36px] font-baloo font-bold text-center text-[#4A4A4A]">
+          En quoi consiste Oubly ?
         </h2>
 
         {/* Étape 1 */}
-        <div className="flex flex-col md:flex-row items-center gap-8 mb-16">
+        <div className="flex flex-col md:flex-row items-center gap-8">
           {/* Image */}
-          <div className="w-full md:w-[350px] h-[200px] bg-gray-200 rounded-lg flex items-center justify-center">
-            <img
-              src="https://via.placeholder.com/350x200"
-              alt="Étape 1"
-              className="max-w-full max-h-full object-contain"
-            />
+          <div
+            className="w-full md:w-[350px] h-[200px] rounded-lg flex items-center justify-center bg-[url('https://i.ibb.co/qMxbv3pz/714ccbb1aa427b583aa2c3e4c3fb0f9522397727.jpg')] bg-cover bg-center">
           </div>
 
           {/* Texte */}
           <div className="flex-1">
-            <h3 className="text-[28px] font-bold mb-4 text-gray-900">
-              Nom de l'étape 1
+            <h3 className="text-[28px] font-baloo font-bold mb-4 text-[#4A4A4A]">
+              Un service pensé pour tous, partout en France
             </h3>
-            <p className="text-[16px] text-gray-700">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+            <p className="text-[18px] text-[#4A4A4A]">
+              Notre service permet à toute personne de retrouver facilement un objet perdu, peu importe où il a été égaré en France. Il centralise les recherches sur une seule plateforme.
+              <br/><br/>
+              Nous nous adressons aussi aux entreprises, établissements publics ou privés qui gèrent chaque jour des dizaines d'objets trouvés. Grâce à notre outil, ils peuvent mieux organiser leur stockage et faciliter la restitution aux propriétaires légitimes.
             </p>
           </div>
         </div>
 
         {/* Étape 2 */}
-        <div className="flex flex-col md:flex-row-reverse items-center gap-8 mb-16">
+        <div className="flex flex-col md:flex-row-reverse items-center gap-8">
           {/* Image */}
-          <div className="w-full md:w-[350px] h-[200px] bg-gray-200 rounded-lg flex items-center justify-center">
-            <img
-              src="https://via.placeholder.com/350x200"
-              alt="Étape 2"
-              className="max-w-full max-h-full object-contain"
-            />
+          <div
+            className="w-full md:w-[350px] h-[200px] rounded-lg flex items-center justify-center bg-[url('https://i.ibb.co/Hfxb4Tr4/6c78698ef8a67d6245628457ca22661a198008a9.jpg')] bg-cover bg-center">
           </div>
 
           {/* Texte */}
           <div className="flex-1">
-            <h3 className="text-[28px] font-bold mb-4 text-gray-900">
-              Nom de l'étape 2
+            <h3 className="text-[28px] font-baloo font-bold mb-4 text-[#4A4A4A]">
+              Une implantation locale à Nantes
             </h3>
-            <p className="text-[16px] text-gray-700">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+            <p className="text-[18px] text-[#4A4A4A]">
+              Le projet a été lancé à Nantes, une ville dynamique et idéale pour tester notre service en conditions réelles. C'est ici que nous avons mis en place nos premiers partenariats avec des lieux à forte fréquentation.
+              <br/><br/>
+              Cette implantation locale nous permet de construire un modèle solide avant de le déployer progressivement dans d'autres villes en France.
             </p>
           </div>
         </div>
 
         {/* Étape 3 */}
-        <div className="flex flex-col md:flex-row items-center gap-8 mb-12">
+        <div className="flex flex-col md:flex-row items-center gap-8 mb-5">
           {/* Image */}
-          <div className="w-full md:w-[350px] h-[200px] bg-gray-200 rounded-lg flex items-center justify-center">
-            <img
-              src="https://via.placeholder.com/350x200"
-              alt="Étape 3"
-              className="max-w-full max-h-full object-contain"
-            />
+          <div
+            className="w-full md:w-[350px] h-[200px] rounded-lg flex items-center justify-center bg-[url('https://i.ibb.co/Q778kJsM/1e9583f44565844643e1a659306749a235f732fd.jpg')] bg-cover bg-center">
           </div>
 
           {/* Texte */}
           <div className="flex-1">
-            <h3 className="text-[28px] font-bold mb-4 text-gray-900">
-              Nom de l'étape 3
+            <h3 className="text-[28px] font-baloo font-bold mb-4 text-[#4A4A4A]">
+              Comment ça fonctionne ?
             </h3>
-            <p className="text-[16px] text-gray-700">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+            <p className="text-[18px] text-[#4A4A4A]">
+              Pour récupérer un objet, l'utilisateur commence par le signaler ou le rechercher à l'aide de filtres pratiques (lieu, type d'objet, date...). Il consulte ensuite une fiche détaillée pour confirmer qu'il s'agit bien de son bien.
+              <br/><br/>
+              S'il le retrouve, il peut soit se rendre sur place pour le récupérer, soit demander une livraison à domicile ou en point relais, selon ce qui lui convient le mieux.
             </p>
           </div>
         </div>
       </div>
 
       {/* Section Merci à nos utilisateurs */}
-      <div className="mt-[100px] max-w-[1100px] mx-auto px-4 mb-16">
-        <h2 className="text-[32px] font-bold mb-12 text-center text-gray-900">
-          Merci à nos utilisateurs !
+      <div className="mt-[100px] max-w-[1100px] mx-auto px-4">
+        <h2 className="text-[36px] font-baloo font-bold mb-12 text-center text-[#4A4A4A]">
+          Découvrez les objets trouvés le plus récemment
         </h2>
 
         {/* Cards en colonne */}
-        <div className="flex flex-col items-center gap-4 max-w-[900px] mx-auto">
+        <div className="flex flex-col items-center gap-9 max-w-[900px] mx-auto">
           {usersWithItems.map((item, index) => (
-            <div key={index} className="bg-white rounded-lg shadow-md p-4 w-full">
-              <div className="flex items-center gap-6">
-                <p className="text-[16px] font-medium text-gray-900">
+            <div key={index} className="bg-[#FBF7F2] rounded-full p-4 w-full border border-[#FFBC33]">
+              <div className="flex items-center gap-6 ml-[20px]">
+                <p className=" items-center text-[18px] font-bold text-[#4A4A4A] font-baloo">
                   {item.users?.username || 'Utilisateur inconnu'} a ramené :
                 </p>
+
                 <div className="flex items-center gap-4">
-                  <FaBox className="text-gray-500" />
-                  <span className="text-[16px] text-gray-700">{item.name}</span>
-                  <span className='text-[16px]'> - </span>
-                  <span className="text-[16px] text-gray-700">{item.categories?.nom || 'Catégorie inconnue'}</span>
-                  <span className='text-[16px]'> - </span>
-                  <span className="text-[16px] text-gray-700">{item.etablissements?.villes?.nom || 'Ville inconnue'}</span>
+                  <FaBox className="text-[#4A4A4A]" />
+                  <span className="text-[18px] text-[#4A4A4A] font-nunito">{item.name}</span>
+                  <span className='text-[18px] font-nunito'>-</span>
+                  <span className="text-[18px] text-[#4A4A4A] font-nunito">{item.categories?.nom || 'Catégorie inconnue'}</span>
+                  <span className='text-[18px] font-nunito'>-</span>
+                  <span className="text-[18px] text-[#4A4A4A] font-nunito">{item.etablissements?.villes?.nom || 'Ville inconnue'}</span>
                 </div>
               </div>
             </div>
