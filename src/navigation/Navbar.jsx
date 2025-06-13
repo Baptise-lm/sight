@@ -40,7 +40,7 @@ const Navbar = () => {
         </Link>
 
         {/* Icône de profil à droite */}
-        <div className="flex px-[45px] py-[25px] justify-center items-center gap-[10px] rounded-full text-[18px] font-bold bg-[#FFBC33] transition-colors text-[#4A4A4A] font-nunito">
+        <div className="flex px-[30px] py-[15px] justify-center items-center gap-[10px] rounded-full text-[18px] font-bold bg-[#FFBC33] transition-colors text-[#4A4A4A] font-nunito">
           Compte
         </div>
       </div>

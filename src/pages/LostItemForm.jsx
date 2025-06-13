@@ -219,7 +219,7 @@ const LostItemForm = () => {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className={`flex px-[45px] py-[25px] justify-center items-center gap-[10px] rounded-full text-[18px] font-bold bg-[#FFBC33] transition-colors text-[#4A4A4A] font-nunito ${isSubmitting ? 'bg-gray-400' : 'bg-[#FFBC33]'} focus:outline-none focus:ring-1 focus:ring-[#FFBC33]`}
+                className={`flex px-[30px] py-[15px] justify-center items-center gap-[10px] rounded-full text-[18px] font-bold bg-[#FFBC33] transition-colors text-[#4A4A4A] font-nunito ${isSubmitting ? 'bg-gray-400' : 'bg-[#FFBC33]'} focus:outline-none focus:ring-1 focus:ring-[#FFBC33]`}
               >
                 {isSubmitting ? 'Enregistrement...' : 'Valider'}
               </button>

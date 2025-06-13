@@ -63,14 +63,14 @@ const HomePage = () => {
         <div className="flex flex-col sm:flex-row justify-center gap-12">
           <button
             onClick={handleFoundItemClick}
-            className="flex px-[45px] py-[25px] justify-center items-center gap-[10px] rounded-full text-[18px] font-bold bg-[#FFBC33] transition-colors text-[#4A4A4A] font-nunito"
+            className="flex px-[30px] py-[15px] justify-center items-center gap-[10px] rounded-full text-[18px] font-bold bg-[#FFBC33] transition-colors text-[#4A4A4A] font-nunito"
           >
             Objet trouvé
           </button>
 
           <button
             onClick={handleLostItemClick}
-            className="flex px-[45px] py-[25px] justify-center items-center gap-[10px] rounded-full text-[18px] font-bold bg-[#FFBC33] transition-colors text-[#4A4A4A] font-nunito"
+            className="flex px-[30px] py-[15px] justify-center items-center gap-[10px] rounded-full text-[18px] font-bold bg-[#FFBC33] transition-colors text-[#4A4A4A] font-nunito"
           >
             Objet perdu
           </button>
